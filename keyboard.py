@@ -8,13 +8,13 @@ import tkinter as tk
 import pyautogui
 
 # ========== Configurations ====================
-BUTTON_BACKGROUND = "black"
+BUTTON_BACKGROUND = "white"
 MAIN_FRAME_BACKGROUND = "cornflowerblue"
 BUTTON_LOOK = "flat"  # flat, groove, raised, ridge, solid, or sunken
 TOP_BAR_TITLE = "Python Virtual KeyBoard."
 TOPBAR_BACKGROUND = "skyblue"
 TRANSPARENCY = 1
-FONT_COLOR = "white"
+FONT_COLOR = "black"
 
 # ==============================================
 
