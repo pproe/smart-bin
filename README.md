@@ -1,4 +1,4 @@
-# CITS5506-Smart-Bin
+# smart-bin
 
 Small GUI Applet written with the TKinter Python Library to interact with Smart Bin system via Raspberry Pi.
 
