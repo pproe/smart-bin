@@ -11,12 +11,9 @@ Todo:
 @Date: 12/09/2022
 """
 
-from cgitb import text
 import tkinter as tk
-from turtle import bgcolor
 from backend import Backend
 from keyboard import Keyboard
-
 
 # Configuration Options
 BACKGROUND_COLOUR = "white"
