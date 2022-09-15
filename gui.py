@@ -31,7 +31,7 @@ class App(tk.Frame):
         self.input_frame = tk.Frame(self, bg=BACKGROUND_COLOUR)
 
         # String variable for input box
-        input_text = tk.StringVar()
+        self.input_text = tk.StringVar()
 
         # Setup Label tooltip
         self.tooltip = tk.Label(
@@ -41,13 +41,16 @@ class App(tk.Frame):
         # Setup Input Box & Button
         self.input_box = tk.Entry(
             self.input_frame,
-            textvariable=input_text,
+            textvariable=self.input_text,
             highlightcolor="black",
             highlightthickness=1,
         )
         self.input_box.focus()
         self.submit_button = tk.Button(
-            self.input_frame, text="Submit", bg=BACKGROUND_COLOUR
+            self.input_frame,
+            text="Submit",
+            bg=BACKGROUND_COLOUR,
+            command=self.backend.process_item,
         )
 
         # Setup Keyboard
