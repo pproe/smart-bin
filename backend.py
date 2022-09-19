@@ -57,7 +57,7 @@ class Backend:
     def __retrieve_bin_number(self, item_input):
         cursor = self.db_connection.cursor()
         cursor.execute(
-            f"SELECT bin FROM items WHERE name='{item_input}' OR barcode='{item_input}'"
+            f"SELECT bin FROM items WHERE name LIKE '%{item_input.lower()}%' OR barcode='{item_input}'"
         )
         return cursor.fetchone()
 
@@ -66,7 +66,7 @@ class Backend:
             raise Exception("Bin Number must be specified and within range 0-3")
 
         new_item = Item(
-            name=name, barcode=barcode, notes=notes, bin_number=bin_number
+            name=name.lower(), barcode=barcode, notes=notes, bin_number=bin_number
         )
         cursor = self.db_connection.cursor()
         cursor.execute(
