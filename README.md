@@ -47,9 +47,10 @@ Each bin is specified by an integer ranging from 0 - 4, as follows:
  
 ```JSON
 {
-  "time": "2022-09-19T02:22:29Z",
-  "itemName": "Example Item",
-  "binNumber": 0
+  "Id": "1"
+  "Time": "2022-09-19T02:22:29Z",
+  "Name": "Example Item",
+  "BinNumber": 0
 }
 ```
  
