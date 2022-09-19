@@ -10,6 +10,8 @@ import json
 class Backend:
     """Provides backend for GUI Smart Bin App"""
 
+    #============================= Private Methods =============================
+
     def __init__(self, gui, init_file, dblocation=":memory:", ):
         self.gui = gui
 
@@ -40,7 +42,7 @@ class Backend:
 
         # Iterate over items in item_data, inserting each item
         for item in item_data['items']:
-            self.insert_item(item["name"], item["barcode"], item["notes"], item["bin"])
+            self.__insert_item(item["name"], item["barcode"], item["notes"], item["bin"])
 
     def __del__(self):
         print("Cleaning up backend...")
@@ -52,21 +54,14 @@ class Backend:
 
         self.db_connection.close()
 
-    def process_item(self):
-
-        # Fetch text entry from input
-        item_input = self.gui.input_text.get()
-        bin_number = self.retrieve_bin_number(item_input)
-        print(bin_number)
-
-    def retrieve_bin_number(self, item_input):
+    def __retrieve_bin_number(self, item_input):
         cursor = self.db_connection.cursor()
         cursor.execute(
             f"SELECT bin FROM items WHERE name='{item_input}' OR barcode='{item_input}'"
         )
         return cursor.fetchone()
 
-    def insert_item(self, name="", barcode="", notes="", bin_number=-1):
+    def __insert_item(self, name="", barcode="", notes="", bin_number=-1):
         if bin_number == -1:
             raise Exception("Bin Number must be specified and within range 0-3")
 
@@ -84,3 +79,12 @@ class Backend:
             },
         )
         self.db_connection.commit()
+
+    #============================= Public Methods ==============================
+
+    def process_item(self):
+
+        # Fetch text entry from input
+        item_input = self.gui.input_text.get()
+        bin_number = self.__retrieve_bin_number(item_input)
+        print(bin_number)
