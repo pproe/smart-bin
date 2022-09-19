@@ -31,3 +31,25 @@ A JSON file can be used to specify the correct bin for a set of items. This file
   ]
 }
 ```
+
+### Bin Numbers
+Each bin is specified by an integer ranging from 0 - 4, as follows:
+ - 0 = Landfill
+ - 1 = Recycling
+ - 2 = Compost
+ - 3 = Containers for Change
+ 
+ ### Recording Item Disposals
+ 
+ _Not yet implemented_
+ 
+ Any time an item is disposed using the Smart Bin system, its disposal is recorded to an external key-value pair database, providing the following information:
+ 
+```JSON
+{
+  "time": "2022-09-19T02:22:29Z",
+  "itemName": "Example Item",
+  "binNumber": 0
+}
+```
+ 
