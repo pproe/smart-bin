@@ -15,3 +15,19 @@ Users can type the product name or scan the barcode of a product with a connecte
 2. Go into the newly created folder: `cd smart-bin`
 3. Install required packages: `pip install -r requirements.txt`
 4. Run the GUI application: `python gui.py`
+
+### Initialization File
+A JSON file can be used to specify the correct bin for a set of items. This file must be specified using the `--init / -i` option when running `gui.py` and must follow the following format:
+
+```JSON
+{
+  "items": [
+    {
+      "name": "",
+      "barcode": "",
+      "notes": "",
+      "bin": 0
+    }, ...
+  ]
+}
+```

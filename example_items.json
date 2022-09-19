@@ -1,0 +1,10 @@
+{
+  "items": [
+    {
+      "name": "Test",
+      "barcode": "A14433",
+      "notes": "Test notes",
+      "bin": 0
+    }
+  ]
+}

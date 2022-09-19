@@ -14,6 +14,8 @@ Todo:
 import tkinter as tk
 from backend import Backend
 from keyboard import Keyboard
+import argparse
+from pathlib import Path
 
 # Configuration Options
 BACKGROUND_COLOUR = "white"
@@ -22,11 +24,11 @@ BACKGROUND_COLOUR = "white"
 class App(tk.Frame):
     """Main TKinter GUI for item lookup for the Smart Bin project"""
 
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, init_file=False):
         """Initialise GUI and all of its components."""
-        tk.Frame.__init__(self, parent, bg=BACKGROUND_COLOUR, *args, **kwargs)
+        tk.Frame.__init__(self, parent, bg=BACKGROUND_COLOUR)
         self.parent = parent
-        self.backend = Backend(self)
+        self.backend = Backend(self, init_file)
 
         self.input_frame = tk.Frame(self, bg=BACKGROUND_COLOUR)
 
@@ -67,6 +69,26 @@ class App(tk.Frame):
 
 
 if __name__ == "__main__":
+
+    # Parse Arguments
+    parser = argparse.ArgumentParser(description="Displays GUI for smart-bin application.")
+    parser.add_argument('-i', '--init', type=str, required=False, help='Initializes database from specified JSON file.')
+    args = parser.parse_args()
+
+    if(args.init):
+        init_confirm = ''
+
+        while not (init_confirm == 'n' or init_confirm == 'N' or init_confirm =='y' or init_confirm =='Y'):
+            init_confirm = input("Initializing database will overwrite all existing data. Continue? ('Y' or 'N') ")
+            if init_confirm == 'n' or init_confirm == 'N':
+                print('Quitting...')
+                quit()
+
+        if not Path(args.init).is_file():
+            print(f"No file found at '{args.init}'.")
+            print('Quitting...')
+            quit()
+
     root = tk.Tk()
-    App(root).pack(side="top", fill="both", expand=True)
+    App(root, init_file=args.init).pack(side="top", fill="both", expand=True)
     root.mainloop()

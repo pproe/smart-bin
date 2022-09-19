@@ -4,20 +4,30 @@ Provides backend for GUI Smart Bin App
 
 import sqlite3
 from item import Item
+import json
 
 
 class Backend:
     """Provides backend for GUI Smart Bin App"""
 
-    def __init__(self, gui, dblocation=":memory:"):
+    def __init__(self, gui, init_file, dblocation=":memory:", ):
         self.gui = gui
 
         # Setup SQLite database
         self.db_connection = sqlite3.connect(dblocation)
-        self.__init_db()
+        if(init_file):
+            self.__init_db(init_file)
 
-    def __init_db(self):
+    def __init_db(self, init_file):
+
+        # Load JSON
+        f = open(init_file)
+        item_data = json.load(f)
+        f.close()
+
         cursor = self.db_connection.cursor()
+        
+        # Create table
         cursor.execute(
             """CREATE TABLE items (
                 name text,
@@ -27,6 +37,10 @@ class Backend:
             )"""
         )
         self.db_connection.commit()
+
+        # Iterate over items in item_data, inserting each item
+        for item in item_data['items']:
+            self.insert_item(item["name"], item["barcode"], item["notes"], item["bin"])
 
     def __del__(self):
         print("Cleaning up backend...")
@@ -42,12 +56,13 @@ class Backend:
 
         # Fetch text entry from input
         item_input = self.gui.input_text.get()
-        self.insert_item(name=item_input, bin_number=1)
+        bin_number = self.retrieve_bin_number(item_input)
+        print(bin_number)
 
     def retrieve_bin_number(self, item_input):
         cursor = self.db_connection.cursor()
         cursor.execute(
-            f"SELECT * FROM items WHERE name='{item_input}' OR barcode='{item_input}'"
+            f"SELECT bin FROM items WHERE name='{item_input}' OR barcode='{item_input}'"
         )
         return cursor.fetchone()
 
