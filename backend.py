@@ -59,7 +59,12 @@ class Backend:
         cursor.execute(
             f"SELECT bin FROM items WHERE name LIKE '%{item_input.lower()}%' OR barcode='{item_input}'"
         )
-        return cursor.fetchone()
+        bin_number = cursor.fetchone()
+
+        if not bin_number:
+            return -1
+        
+        return bin_number[0]
 
     def __insert_item(self, name="", barcode="", notes="", bin_number=-1):
         if bin_number == -1:
