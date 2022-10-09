@@ -16,8 +16,8 @@ Users can type the product name or scan the barcode of a product with a connecte
 3. Install required packages: `pip install -r requirements.txt`
 4. Run the GUI application: `python gui.py`
 
-### Initialization File
-A JSON file can be used to specify the correct bin for a set of items. This file must be specified using the `--init / -i` option when running `gui.py` and must follow the following format:
+### Config File
+A JSON file can be used to specify the correct bin for a set of items. This file's location must be specified in `config.py` and should follow the following format:
 
 ```JSON
 {
