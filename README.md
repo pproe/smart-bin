@@ -54,3 +54,6 @@ Each bin is specified by an integer ranging from 0 - 4, as follows:
 }
 ```
  
+### Setting up Local DynamoDB (for testing)
+Follow the instructions found on [this page](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html) to start a local DynamoDB instance.
+
