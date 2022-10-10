@@ -7,11 +7,14 @@ import sqlite3
 import json
 import uuid
 import boto3
+import RPi.GPIO as GPIO
+from time import sleep
 from config import (
     AWS_ACCESS_KEY_ID,
     AWS_DYNAMODB_ENDPOINT,
     AWS_REGION,
     AWS_SECRET_ACCESS_KEY,
+    OUTPUT_PINS,
     SQLITE_DB_LOCATION,
     SQLITE_INIT_FILE,
     TABLE_NAME,
@@ -138,6 +141,27 @@ class Backend:
              "Name": name,
              "BinNumber": bin_number
          })
+
+    def highlight_bin(self, bin_number):
+        if bin_number == 0:
+            GPIO.output(OUTPUT_PINS[0], GPIO.HIGH)
+            sleep(5)
+            GPIO.output(OUTPUT_PINS[0], GPIO.LOW)
+        elif bin_number == 1:
+            GPIO.output(OUTPUT_PINS[1], GPIO.HIGH)
+            sleep(5)
+            GPIO.output(OUTPUT_PINS[1], GPIO.LOW)
+        elif bin_number == 2:
+            GPIO.output(OUTPUT_PINS[2], GPIO.HIGH)
+            sleep(5)
+            GPIO.output(OUTPUT_PINS[2], GPIO.LOW)
+        elif bin_number == 3:
+            GPIO.output(OUTPUT_PINS[3], GPIO.HIGH)
+            sleep(5)
+            GPIO.output(OUTPUT_PINS[3], GPIO.LOW)
+        else:
+            print(f'Error highlighting bin: Bin number "{bin_number}" does not exist.')
+
     # ============================ Public Methods =============================
 
     def process_item(self):
