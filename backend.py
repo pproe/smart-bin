@@ -2,8 +2,10 @@
 Provides backend for GUI Smart Bin App
 """
 
+from datetime import datetime
 import sqlite3
 import json
+import uuid
 import boto3
 from config import (
     AWS_ACCESS_KEY_ID,
@@ -20,7 +22,7 @@ from item import Item
 class Backend:
     """Provides backend for GUI Smart Bin App"""
 
-    # ============================= Private Methods =============================
+    # ============================ Private Methods ============================
 
     def __init__(self, gui):
         self.gui = gui
@@ -48,7 +50,7 @@ class Backend:
                 TableName=TABLE_NAME,
                 KeySchema=[{"AttributeName": "Id", "KeyType": "HASH"}],
                 AttributeDefinitions=[
-                    {"AttributeName": "Id", "AttributeType": "N"},
+                    {"AttributeName": "Id", "AttributeType": "S"},
                 ],
                 ProvisionedThroughput={
                     "ReadCapacityUnits": 1,
@@ -56,11 +58,6 @@ class Backend:
                 },
             )
             print("DynamoDB created")
-
-        response = self.dynamodb.Table(TABLE_NAME).scan()
-        data = response["Items"]
-        print("DynamoDB Table entries: ")
-        print(data)
 
     def __init_db(self, init_file):
 
@@ -131,8 +128,17 @@ class Backend:
             },
         )
         self.db_connection.commit()
-
-    # ============================= Public Methods ==============================
+    
+    def __log_disposal(self, name, bin_number):
+         table = self.dynamodb.Table(TABLE_NAME)
+         
+         table.put_item(Item={
+             "Id": str(uuid.uuid4()),
+             "Time": datetime.utcnow().isoformat(),
+             "Name": name,
+             "BinNumber": bin_number
+         })
+    # ============================ Public Methods =============================
 
     def process_item(self):
         # Fetch text entry from input
@@ -141,4 +147,5 @@ class Backend:
         if not item:
             print(f"Item corresponding to {item_input} does not exist")
             return
-        print(item)
+
+        self.__log_disposal(item[0], item[3])
