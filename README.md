@@ -47,10 +47,10 @@ Each bin is specified by an integer ranging from 0 - 4, as follows:
  
 ```JSON
 {
-  "Id": "1"
-  "Time": "2022-09-19T02:22:29Z",
-  "Name": "Example Item",
-  "BinNumber": 0
+  "Id": "bd5a6d7d-814a-484e-ae23-e06a34b75e64", // String (uuidv4)
+  "Time": "2022-09-19T02:22:29Z", //String (ISO8601)
+  "Name": "Example Item", //String
+  "BinNumber": 0 // Number (0-3)
 }
 ```
  
