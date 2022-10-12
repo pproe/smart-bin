@@ -53,6 +53,8 @@ class App(tk.Frame):
         self.keyboard = Keyboard(self, bg=BACKGROUND_COLOUR)
 
         # Build Layout
+        #self.exit_button = tk.Button(self, text="Exit", command=root.destroy)
+        #self.exit_button.pack(pady=20)
         self.tooltip.pack(side=tk.TOP, pady=25)
         self.input_frame.pack(side=tk.TOP, expand=tk.TRUE, fill=tk.X)
         self.input_box.pack(
