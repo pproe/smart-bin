@@ -1,9 +1,3 @@
-"""
-GUI to provide keyboard for Smart Bin Application
-@Author: surajsinghbisht054, http://bitforestinfo.com
-@Credit: https://github.com/surajsinghbisht054/py-VirtualKeyBoard
-"""
-
 import tkinter as tk
 import pyautogui
 
@@ -74,7 +68,6 @@ keys = [
                     "?",
                     "shift",
                 ),
-                ("ctrl", "win", "alt", "space  ", "alt", "win", "[=]", "ctrl"),
             ],
         ],
     ],
@@ -88,9 +81,7 @@ class Keyboard(tk.Frame):
         # Function For Creating Buttons
         self.create_frames_and_buttons()
 
-    # Function For Extracting Data From KeyBoard Table
-    # and then provide us a well looking
-    # keyboard gui
+    # Function For Extracting Data From KeyBoard Table and generating GUI
     def create_frames_and_buttons(self):
         # take section one by one
         for key_section in keys:

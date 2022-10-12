@@ -4,9 +4,6 @@ GUI for inputting item name for Smart Bin project.
 Displays On-Screen keyboard, Input Box, and Submit button for finding correct
 bin to place item into.
 
-Todo:
-- Add feedback for inputted item (error if doesn't exist)
-
 @Author: Patrick Roe, http://pproe.dev
 @Date: 12/09/2022
 """
@@ -67,6 +64,8 @@ class App(tk.Frame):
 
 if __name__ == "__main__":
 
-    root = tk.Tk()
+    root = tk.Tk(className="SmartBin GUI")
+    root.geometry("480x320")
+    root.attributes("-fullscreen", True)
     App(root).pack(side="top", fill="both", expand=True)
     root.mainloop()
