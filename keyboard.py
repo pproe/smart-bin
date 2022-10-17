@@ -21,9 +21,7 @@ keys = [
             ("Character_Keys"),
             ({"side": "top", "expand": "yes", "fill": "both"}),
             [
-                ("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace"),
                 (
-                    "tab",
                     "q",
                     "w",
                     "e",
@@ -34,10 +32,7 @@ keys = [
                     "i",
                     "o",
                     "p",
-                    "{",
-                    "}",
-                    ";",
-                    "'",
+                    "backspace"
                 ),
                 (
                     "capslock",
