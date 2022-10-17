@@ -1,14 +1,26 @@
 {
   "items": [
     {
-      "name": "Test",
-      "barcode": "A14433",
-      "notes": "Test notes",
+      "name": "Apple",
+      "barcode": "",
+      "notes": "",
+      "bin": 2
+    },
+    {
+      "name": "Schweppes Zero Sugar Pink Lemonade",
+      "barcode": "9315596008172",
+      "notes": "",
+      "bin": 3
+    },
+    {
+      "name": "Vetta Smart Pasta Spirals",
+      "barcode": "9310146972149",
+      "notes": "",
       "bin": 0
     },
     {
-      "name": "Masters Choccy Milk",
-      "barcode": "",
+      "name": "Great Northern Super Crisp 6-Pack",
+      "barcode": "9320000500463",
       "notes": "",
       "bin": 1
     }
