@@ -91,10 +91,10 @@ class Keyboard(tk.Frame):
                 side="left",
                 expand="yes",
                 fill="both",
-                padx=10,
-                pady=10,
-                ipadx=10,
-                ipady=10,
+                padx=0,
+                pady=0,
+                ipadx=0,
+                ipady=0,
             )
 
             for layer_name, layer_properties, layer_keys in key_section:
