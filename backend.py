@@ -7,7 +7,7 @@ import sqlite3
 import json
 import uuid
 import boto3
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 from time import sleep
 from config import (
     AWS_DYNAMODB_ENDPOINT,
@@ -30,11 +30,11 @@ class Backend:
         self.gui = gui
 
         # Setup Raspberry Pi Connection
-        """ GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(OUTPUT_PINS[0], GPIO.OUT)
         GPIO.setup(OUTPUT_PINS[1], GPIO.OUT)
         GPIO.setup(OUTPUT_PINS[2], GPIO.OUT)
-        GPIO.setup(OUTPUT_PINS[3], GPIO.OUT) """
+        GPIO.setup(OUTPUT_PINS[3], GPIO.OUT)
 
         # Setup SQLite database
         self.db_connection = sqlite3.connect(SQLITE_DB_LOCATION)
@@ -153,7 +153,7 @@ class Backend:
              "BinNumber": bin_number
          })
 
-    def highlight_bin(self, bin_number):
+    def __highlight_bin(self, bin_number):
         if bin_number == 0:
             GPIO.output(OUTPUT_PINS[0], GPIO.HIGH)
             sleep(5)
@@ -186,4 +186,5 @@ class Backend:
             return
 
         self.__log_disposal(item[0], item[3])
+        self.__highlight_bin(item[3])
         self.__clear_input()
