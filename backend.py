@@ -177,7 +177,7 @@ class Backend:
         self.gui.input_box.delete(0, 'end')
     # ============================ Public Methods =============================
 
-    def process_item(self):
+    def process_item(self, event=None):
         # Fetch text entry from input
         item_input = self.gui.input_text.get()
         item = self.__retrieve_item(item_input)

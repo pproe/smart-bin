@@ -48,7 +48,7 @@ class App(tk.Frame):
             bg=BACKGROUND_COLOUR,
             command=self.backend.process_item,
         )
-
+        self.parent.bind('<Return>', self.backend.process_item)
         # Setup Keyboard
         self.keyboard = Keyboard(self, bg=BACKGROUND_COLOUR)
 
