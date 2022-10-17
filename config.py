@@ -1,9 +1,8 @@
 # DynamoDB Options
-AWS_REGION = "ap-southeast-2"
+AWS_REGION = "ap-northeast-1"
 AWS_DYNAMODB_ENDPOINT = "http://localhost:8000/"
-AWS_ACCESS_KEY_ID = "*****"
-AWS_SECRET_ACCESS_KEY = "*****"
-TABLE_NAME = "Disposals"
+TABLE_NAME = "smartbin_analytics"
+CREDENTIALS_FILE = "aws_credentials.json"
 
 # SQLite Options
 SQLITE_DB_LOCATION = ":memory:"

@@ -7,13 +7,12 @@ import sqlite3
 import json
 import uuid
 import boto3
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 from time import sleep
 from config import (
-    AWS_ACCESS_KEY_ID,
     AWS_DYNAMODB_ENDPOINT,
     AWS_REGION,
-    AWS_SECRET_ACCESS_KEY,
+    CREDENTIALS_FILE,
     OUTPUT_PINS,
     SQLITE_DB_LOCATION,
     SQLITE_INIT_FILE,
@@ -31,23 +30,28 @@ class Backend:
         self.gui = gui
 
         # Setup Raspberry Pi Connection
-        GPIO.setmode(GPIO.BCM)
+        """ GPIO.setmode(GPIO.BCM)
         GPIO.setup(OUTPUT_PINS[0], GPIO.OUT)
         GPIO.setup(OUTPUT_PINS[1], GPIO.OUT)
         GPIO.setup(OUTPUT_PINS[2], GPIO.OUT)
-        GPIO.setup(OUTPUT_PINS[3], GPIO.OUT)
+        GPIO.setup(OUTPUT_PINS[3], GPIO.OUT) """
 
         # Setup SQLite database
         self.db_connection = sqlite3.connect(SQLITE_DB_LOCATION)
         self.__init_db(SQLITE_INIT_FILE)
 
         # Setup DynamoDB connection
+
+        f = open(CREDENTIALS_FILE, encoding="UTF8")
+        aws_creds = json.load(f)
+        f.close()
+
         self.dynamodb = boto3.resource(
             "dynamodb",
             region_name=AWS_REGION,
-            endpoint_url=AWS_DYNAMODB_ENDPOINT,
-            aws_access_key_id=AWS_ACCESS_KEY_ID,
-            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+            #endpoint_url=AWS_DYNAMODB_ENDPOINT, Testing only
+            aws_access_key_id=aws_creds["Access key ID"],
+            aws_secret_access_key=aws_creds["Secret access key"],
         )
         self.__init_dynamodb()
 
@@ -67,7 +71,7 @@ class Backend:
                     "WriteCapacityUnits": 1,
                 },
             )
-            print("DynamoDB created")
+            print("DynamoDB table created")
 
     def __init_db(self, init_file):
 
@@ -169,6 +173,8 @@ class Backend:
         else:
             print(f'Error highlighting bin: Bin number "{bin_number}" does not exist.')
 
+    def __clear_input(self):
+        self.gui.input_box.delete(0, 'end')
     # ============================ Public Methods =============================
 
     def process_item(self):
@@ -180,3 +186,4 @@ class Backend:
             return
 
         self.__log_disposal(item[0], item[3])
+        self.__clear_input()

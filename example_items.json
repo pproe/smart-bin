@@ -5,6 +5,12 @@
       "barcode": "A14433",
       "notes": "Test notes",
       "bin": 0
+    },
+    {
+      "name": "Masters Choccy Milk",
+      "barcode": "",
+      "notes": "",
+      "bin": 1
     }
   ]
 }
