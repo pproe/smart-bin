@@ -30,6 +30,13 @@ class Backend:
     def __init__(self, gui):
         self.gui = gui
 
+        # Setup Raspberry Pi Connection
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(OUTPUT_PINS[0], GPIO.OUT)
+        GPIO.setup(OUTPUT_PINS[1], GPIO.OUT)
+        GPIO.setup(OUTPUT_PINS[2], GPIO.OUT)
+        GPIO.setup(OUTPUT_PINS[3], GPIO.OUT)
+
         # Setup SQLite database
         self.db_connection = sqlite3.connect(SQLITE_DB_LOCATION)
         self.__init_db(SQLITE_INIT_FILE)
