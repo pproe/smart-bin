@@ -41,8 +41,6 @@ Each bin is specified by an integer ranging from 0 - 4, as follows:
  
  ### Recording Item Disposals
  
- _Not yet implemented_
- 
  Any time an item is disposed using the Smart Bin system, its disposal is recorded to an external key-value pair database, providing the following information:
  
 ```JSON
